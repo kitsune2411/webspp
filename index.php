@@ -3,13 +3,13 @@ session_start();
 
 include_once 'proses.php';
 
-$login = new Login();
+$auth = new Auth();
 
 if (isset($_POST['submit'])) {
-    $username = $login->conn->real_escape_string($_POST['username']);
-    $password = $login->conn->real_escape_string($_POST['password']);
+    $username = $auth->conn->real_escape_string($_POST['username']);
+    $password = $auth->conn->real_escape_string($_POST['password']);
 
-    $jenis = $login->login($username, $password);
+    $jenis = $auth->login($username, $password);
     
 }
 ?>

@@ -2,9 +2,9 @@
 
 require_once 'config/koneksi.php';
 
-class Login extends Connect {
+class Auth extends Connect {
 
-    public function __construct()
+    function __construct()
     {
         parent::__construct();
     }
@@ -59,4 +59,5 @@ class Login extends Connect {
             }
         }
     }
+    
 }

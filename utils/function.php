@@ -3,76 +3,104 @@
 include_once 'databases.php';
 
 class Koneksi extends Database{
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     // membuat fungsi login user 
     public function loginUser($username, $password){
-        $query = mysqli_query($this->koneksi, "SELECT * FROM tb_siswa WHERE nisn='$username' AND nis='$password'");
+        $query = $this->koneksi->query("SELECT * FROM tb_siswa WHERE nisn='$username' AND nis='$password'");
         $data = mysqli_num_rows($query);
 
-        $query2 = mysqli_query($this->koneksi, "SELECT * FROM tb_petugas WHERE username='$username' AND password='$password' AND level='admin'");
+        $query2 = $this->koneksi->query("SELECT * FROM tb_petugas WHERE username='$username' AND password='$password'");
         $data2 = mysqli_num_rows($query2);
-
-        $query3 = mysqli_query($this->koneksi, "SELECT * FROM tb_petugas WHERE username='$username' AND password='$password' AND level='petugas'");
-        $data3 = mysqli_num_rows($query3);
 
         // login siswa
         if($data > 0){
-            mysqli_fetch_array($query);
+            $res = $query->fetch_array();
 			$_SESSION['username'] = $username;
-			$_SESSION['akses']= 'siswa';
+			$_SESSION['nama']= $res['nama'];
             $_SESSION['login'] = true;
 			header('location: views/siswa/dashboard.php');
-        }// login admin
-        else if($data2 > 0){
-            $res = mysqli_fetch_array($query2);
-			$_SESSION['username'] = $username;
-			$_SESSION['akses']= $res['level'];
-            $_SESSION['login'] = true;
-			header('location: views/admin/dashboard.php');
-        }// login petugas
-        else if($data3 > 0){
-            $res = mysqli_fetch_array($query3);
-			$_SESSION['username'] = $username;
-			$_SESSION['akses']= $res['level'];
-            $_SESSION['login'] = true;
-			header('location: views/petugas/dashboard.php');
         }
-        else{
+        
+        if($data2 > 0){
+            // login admin
+            $res = $query2->fetch_array();
+			if($res['level'] == 'admin'){
+                $_SESSION['username'] = $username;
+                $_SESSION['login'] = true;
+                header('location: views/admin/dashboard.php');
+            }
+            // login petugas
+            else if($res['level'] == 'petugas'){
+                $_SESSION['username'] = $username;
+                $_SESSION['login'] = true;
+                header('location: views/petugas/dashboard.php');
+            }
+        }else{
 			echo "<script>alert('Username atau Password Salah!')</script>";
 		}
     }
 
     public function createSiswa($nisn, $nis, $nama, $alamat, $kelas, $no_telp, $spp){
         // lakukan pengecekan untuk akun siswa
-        $query = mysqli_query($this->koneksi, "SELECT * FROM tb_siswa WHERE nisn='$nisn' OR nis='$nis'");
+        $query = $this->koneksi->query("SELECT * FROM tb_siswa WHERE nisn='$nisn' OR nis='$nis'");
         if(mysqli_fetch_assoc($query) === 0){
             echo"<script>alert('data siswa ini sudah ada')</script>";
         }
 
         // mengambil array atau data dari tb spp
-        $id_spp = mysqli_query($this->koneksi, "SELECT * FROM tb_spp WHERE tahun='$spp'");
-        $arr_spp = mysqli_fetch_array($id_spp);
+        $id_spp = $this->koneksi->query("SELECT * FROM tb_spp WHERE tahun='$spp'");
+        $arr_spp = $id_spp->fetch_array();
         $idSpp = $arr_spp['id_spp'];
 
         // mengambil array atau data dari tb kelas
-        $id_kelas = mysqli_query($this->koneksi, "SELECT * FROM tb_kelas WHERE nama_kelas='$kelas'");
-        $arr_kelas = mysqli_fetch_array($id_kelas);
+        $id_kelas = $this->koneksi->query("SELECT * FROM tb_kelas WHERE nama_kelas='$kelas'");
+        $arr_kelas = $id_kelas->fetch_array();
         $idKelas = $arr_kelas['id_kelas'];
 
         // melakukan insert data siswa
-        mysqli_query($this->koneksi, "INSERT INTO tb_siswa VALUES('$nisn', '$nis', '$nama', '$alamat', '$idKelas', '$no_telp', '$idSpp')");
+        $this->koneksi->query("INSERT INTO tb_siswa VALUES('$nisn', '$nis', '$nama', '$alamat', '$idKelas', '$no_telp', '$idSpp')");
     }
 
     public function data_siswa(){
-        $query = mysqli_query($this->koneksi, "CALL data_siswa()");
-        while($s = mysqli_fetch_array($query)){
+        $query = $this->koneksi->query("CALL data_siswa()");
+        while($s = $query->fetch_array()){
             $hasil[] = $s;
         }
         return $hasil;
     }
 
     public function data_petugas(){
-        $query = mysqli_query($this->koneksi, "CALL data_petugas()");
-        while($s = mysqli_fetch_array($query)){
+        $query = $this->koneksi->query("SELECT * FROM tb_petugas");
+        while($s = $query->fetch_array()){
+            $hasil[] = $s;
+        }
+        return $hasil;
+    }
+
+    public function data_kelas(){
+        $query = $this->koneksi->query("SELECT * FROM tb_kelas");
+        while($s = $query->fetch_array()){
+            $hasil[] = $s;
+        }
+        return $hasil;
+    }
+
+    public function data_spp(){
+        $query = $this->koneksi->query("SELECT * FROM tb_spp");
+        while($s = $query->fetch_array()){
+            $hasil[] = $s;
+        }
+        return $hasil;
+    }
+
+    public function data_transaksi(){
+        $query = $this->koneksi->query("SELECT * FROM generate_laporan");
+        while($s = $query->fetch_array()){
             $hasil[] = $s;
         }
         return $hasil;
@@ -80,7 +108,8 @@ class Koneksi extends Database{
 
     public function createPetugas($username, $password, $nama_petugas, $level){
         // melakukan insert data petugas
-        mysqli_query($this->konneksi, "INSERT INTO tb_petugas VALUES('$username', '$password', '$nama_petugas', '$level')");
+       $query =  $this->koneksi->query("INSERT INTO tb_petugas VALUES(null, '$username', '$password', '$nama_petugas', '$level')");
+       return $query;
     }
 
     public function createSpp(){

@@ -54,7 +54,9 @@ if(isset($_POST['login'])){
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block">
+                                <img src="assets/img/undraw_posting_photo.svg" alt="" style="height: 100%; width: 100%;" class="mx-3">
+                            </div>
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
@@ -68,13 +70,6 @@ if(isset($_POST['login'])){
                                         <div class="form-group">
                                             <input type="password" name="password" class="form-control form-control-user"
                                                  placeholder="Password" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
                                         </div>
                                         <button class="btn btn-block btn-info" name="login" type="submit">Login</button>
                                     </form>

@@ -16,6 +16,19 @@ if (isset($_GET['aksi'])) {
     header('location: ../../index.php');
 }
 
+if(isset($_POST['tambah'])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $nama_petugas = $_POST['nama_petugas'];
+    $role = $_POST['level'];
+
+    if($db->createPetugas($username, $password, $nama_petugas, $role)){
+        echo"<script>alert('data berhasil di tambahkan')</script>";
+    }else{
+        echo"<script>alert('gagal, coba lagi')</script>";
+    }
+}
+
 
 ?>
 
@@ -63,7 +76,7 @@ if (isset($_GET['aksi'])) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -97,12 +110,6 @@ if (isset($_GET['aksi'])) {
                 </div>
             </li>
 
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Data SPP</span></a>
-            </li>
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
@@ -113,7 +120,7 @@ if (isset($_GET['aksi'])) {
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="history-transaksi.php">
                     <i class="fas fa-fw fa-book"></i>
                     <span>History Transaksi</span></a>
             </li>
@@ -189,8 +196,15 @@ if (isset($_GET['aksi'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Petugas</h1>
+                        <button class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</button>
+                    </div>
+
                     <table class="table table-hover">
-                        <thead>
+                        <thead class="thead-dark shadow-sm p-3 mb-5 bg-white rounded">
                             <tr>
                                 <th scope="col">Id Petugas</th>
                                 <th scope="col">Username</th>
@@ -200,20 +214,21 @@ if (isset($_GET['aksi'])) {
                             </tr>
                         </thead>
                         <?php
-                        if(is_array($lihat)){
-                            foreach($lihat as $l){
+                        if (is_array($lihat)) {
+                            foreach ($lihat as $l) {
 
                         ?>
-                        <tbody>
-                            <tr>    
-                                <td><?php echo $l['id_petugas'];?></td>
-                                <td><?php echo $l['username'];?></td>
-                                <td><?php echo $l['password'];?></td>
-                                <td><?php echo $l['nama_petugass'];?></td>
-                                <td><?php echo $l['level'];?></td>
-                            </tr>
-                        </tbody>
-                        <?php } }?>
+                                <tbody class="shadow-sm p-3 mb-5 bg-white rounded">
+                                    <tr>
+                                        <td><?php echo $l['id_petugas']; ?></td>
+                                        <td><?php echo $l['username']; ?></td>
+                                        <td><?php echo $l['password']; ?></td>
+                                        <td><?php echo $l['nama_petugass']; ?></td>
+                                        <td><?php echo $l['level']; ?></td>
+                                    </tr>
+                                </tbody>
+                        <?php }
+                        } ?>
                     </table>
                 </div>
                 <!-- /.container-fluid -->
@@ -256,6 +271,54 @@ if (isset($_GET['aksi'])) {
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
                     <a class="btn btn-primary" href="?aksi=logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- tambah data Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="username" name="username" class="form-control" placeholder="Enter Username">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Petugas</label>
+                            <input type="text" name="nama_petugass" class="form-control" placeholder="Enter Nama Petugas">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Role</label>
+                            <select name="level" id="" class="form-control">
+                                <option value="">
+                                    Pilih Role
+                                </option>
+                                <option value="admin">
+                                    admin
+                                </option>
+                                <option value="petugas">
+                                    petugas                                    
+                                </option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="tambah" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
         </div>

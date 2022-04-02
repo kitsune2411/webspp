@@ -16,6 +16,22 @@ if (isset($_GET['aksi'])) {
     header('location: ../../index.php');
 }
 
+if(isset($_POST['tambah'])){
+    $nisn = $_POST['nisn'];
+    $nis = $_POST['nis'];
+    $nama = $_POST['nama'];
+    $id_kelas = $_POST['id_kelas'];
+    $alamat = $_POST['alamat'];
+    $no_telp = $_POST['no_telp'];
+    $id_spp = $_POST['id_spp'];
+
+    if($db->createSiswa($nisn, $nis, $nama, $id_kelas, $alamat, $no_telp, $id_spp)){
+        echo"<script>alert('data berhasil di tambahkan')</script>";
+    }else{
+        echo"<script>alert('gagal, coba lagi')</script>";
+    }
+}
+
 
 ?>
 
@@ -63,7 +79,7 @@ if (isset($_GET['aksi'])) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -100,20 +116,13 @@ if (isset($_GET['aksi'])) {
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Data SPP</span></a>
-            </li>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-money-bill-alt"></i>
                     <span>Transaksi</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="history-transaksi.php">
                     <i class="fas fa-fw fa-book"></i>
                     <span>History Transaksi</span></a>
             </li>
@@ -189,8 +198,14 @@ if (isset($_GET['aksi'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                     <!-- Page Heading -->
+                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Siswa</h1>
+                        <button class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm" data-toggle="modal" data-target="#exampleModal"><i
+                                class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</button>
+                    </div>
                     <table class="table table-hover">
-                        <thead>
+                        <thead class="thead-dark shadow-sm p-3 mb-5 bg-white rounded">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Nisn</th>
@@ -199,7 +214,6 @@ if (isset($_GET['aksi'])) {
                                 <th scope="col">Kelas</th>
                                 <th scope="col">Alamat</th>
                                 <th scope="col">No Telp</th>
-                                <th scope="col">Spp</th>
                             </tr>
                         </thead>
                         <?php
@@ -207,16 +221,15 @@ if (isset($_GET['aksi'])) {
                             foreach($lihat as $l){
 
                         ?>
-                        <tbody>
+                        <tbody class="shadow-sm p-3 mb-5 bg-white rounded">
                             <tr>
                                 <th scope="row"></th>
                                 <td><?php echo $l['nisn'];?></td>
                                 <td><?php echo $l['nis'];?></td>
                                 <td><?php echo $l['nama'];?></td>
-                                <td><?php echo $l['id_kelas'];?></td>
+                                <td><?php echo $l['nama_kelas'];?></td>
                                 <td><?php echo $l['alamat'];?></td>
                                 <td><?php echo $l['no_telp'];?></td>
-                                <td><?php echo $l['id_spp'];?></td>
                             </tr>
                         </tbody>
                         <?php } }?>
@@ -262,6 +275,56 @@ if (isset($_GET['aksi'])) {
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">batal</button>
                     <a class="btn btn-primary" href="?aksi=logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- tambah data Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="">
+                        <div class="form-group">
+                            <label>Nisn</label>
+                            <input type="text" name="nisn" class="form-control" placeholder="Enter Nisn">
+                        </div>
+                        <div class="form-group">
+                            <label>Nis</label>
+                            <input type="text" name="nis" class="form-control" placeholder="Enter Nis">
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Siswa</label>
+                            <input type="text" name="nama" class="form-control" placeholder="Enter Nama Siswa">
+                        </div>
+                        <div class="form-group">
+                            <label>Alamat</label>
+                            <input type="text" name="alamat" class="form-control" placeholder="Enter Alamat">
+                        </div>
+                        <div class="form-group">
+                            <label>Id Kelas</label>
+                            <input type="text" name="id_kelas" class="form-control" placeholder="Enter id Kelas">
+                        </div>
+                        <div class="form-group">
+                            <label>No Telp</label>
+                            <input type="text" name="alamat" class="form-control" placeholder="Enter Alamat">
+                        </div>
+                        <div class="form-group">
+                            <label>Id Spp</label>
+                            <input type="text" name="id_spp" class="form-control" placeholder="Enter Id Spp">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" name="tambah" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
         </div>

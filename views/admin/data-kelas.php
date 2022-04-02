@@ -5,7 +5,7 @@ session_start();
 require_once '../../utils/function.php';
 $db = new Koneksi();
 
-$lihat = $db->data_siswa();
+$lihat = $db->data_kelas();
 
 if (!isset($_SESSION['login'])) {
     header('location: ../../index.php');
@@ -63,7 +63,7 @@ if (isset($_GET['aksi'])) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="dashboard.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -100,20 +100,13 @@ if (isset($_GET['aksi'])) {
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Data SPP</span></a>
-            </li>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-money-bill-alt"></i>
                     <span>Transaksi</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="history-transaksi.php">
                     <i class="fas fa-fw fa-book"></i>
                     <span>History Transaksi</span></a>
             </li>
@@ -189,17 +182,19 @@ if (isset($_GET['aksi'])) {
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                     <!-- Page Heading -->
+                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Kelas</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm"><i
+                                class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
+                    </div>
                     <table class="table table-hover">
-                        <thead>
+                        <thead class="thead-dark shadow-sm p-3 mb-5 bg-white rounded">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nisn</th>
-                                <th scope="col">Nis</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Kelas</th>
-                                <th scope="col">Alamat</th>
-                                <th scope="col">No Telp</th>
-                                <th scope="col">Spp</th>
+                                <th scope="col">Id Kelas</th>
+                                <th scope="col">Nama Kelas</th>
+                                <th scope="col">Kompetensi Keahlian</th>
                             </tr>
                         </thead>
                         <?php
@@ -207,16 +202,12 @@ if (isset($_GET['aksi'])) {
                             foreach($lihat as $l){
 
                         ?>
-                        <tbody>
+                        <tbody class="shadow-sm p-3 mb-5 bg-white rounded">
                             <tr>
                                 <th scope="row"></th>
-                                <td><?php echo $l['nisn'];?></td>
-                                <td><?php echo $l['nis'];?></td>
-                                <td><?php echo $l['nama'];?></td>
                                 <td><?php echo $l['id_kelas'];?></td>
-                                <td><?php echo $l['alamat'];?></td>
-                                <td><?php echo $l['no_telp'];?></td>
-                                <td><?php echo $l['id_spp'];?></td>
+                                <td><?php echo $l['nama_kelas'];?></td>
+                                <td><?php echo $l['kompetensi_keahlian'];?></td>
                             </tr>
                         </tbody>
                         <?php } }?>

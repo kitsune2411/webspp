@@ -20,6 +20,21 @@ class Connect {
         }
     }
 
+    public function iflogin()
+    {
+        if ($_SESSION['status'] == 'login') {
+            if (isset($_SESSION['level'])) {
+                if ($_SESSION['level'] == 'admin') {
+                    header('Location:includes/admin/');
+                } elseif ($_SESSION['level'] == "petugas") {
+                    header('Location:includes/petugas/');
+                }
+            } else {
+                header('location:includes/siswa');
+            }
+        }
+    }
+
     
     /**
      * logout

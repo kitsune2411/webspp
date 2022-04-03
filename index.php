@@ -5,6 +5,8 @@ include_once 'proses.php';
 
 $auth = new Auth();
 
+$auth->iflogin();
+
 if (isset($_POST['submit'])) {
     $username = $auth->conn->real_escape_string($_POST['username']);
     $password = $auth->conn->real_escape_string($_POST['password']);

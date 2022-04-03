@@ -7,6 +7,8 @@ if (empty($_GET)) {
 if (isset($_GET['p'])) {
     if ($_GET['p'] == 'dashboard') {
         include 'dashboard.php';
+    } elseif ($_GET['p'] == 'unauthorize') {
+        include 'unauthorize.php';
     } elseif ($_GET['p'] == 'petugas') {
         include 'data-petugas.php';
     } elseif ($_GET['p'] == 'siswa') {

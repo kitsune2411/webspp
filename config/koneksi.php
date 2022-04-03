@@ -22,16 +22,30 @@ class Connect {
 
     public function iflogin()
     {
-        if ($_SESSION['status'] == 'login') {
-            if (isset($_SESSION['level'])) {
-                if ($_SESSION['level'] == 'admin') {
-                    header('Location:includes/admin/');
-                } elseif ($_SESSION['level'] == "petugas") {
-                    header('Location:includes/petugas/');
+        if (isset($_SESSION['status'])) { 
+            if ($_SESSION['status'] == 'login') {
+                if (isset($_SESSION['level'])) {
+                    if ($_SESSION['level'] == 'admin') {
+                        header('Location:includes/admin');
+                    } elseif ($_SESSION['level'] == "petugas") {
+                        header('Location:includes/petugas');
+                    }
+                } else {
+                    header('location:includes/siswa');
                 }
-            } else {
-                header('location:includes/siswa');
             }
+        }
+    }
+
+    public function isAdmin()
+    {
+        if (isset($_SESSION['level'])) {
+            if (!$_SESSION['level'] == 'admin') {
+                header('location:../../unauthorize.php');
+            }
+        } else {
+            header('location:../../unauthorize.php');
+
         }
     }
 

@@ -7,6 +7,7 @@ require_once 'Admin.php';
 $admin = new Admin();
 
 $admin->islogin();
+$admin->isAdmin();
 
 if (isset($_POST['logout'])) {
     

@@ -35,7 +35,7 @@
                     <form action="" method="post">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 
-                        <button class="btn btn-primary" type="submit" name="logout">Logout</button>
+                        <button class="btn btn-danger" type="submit" name="logout">Logout</button>
                     </form>
                 </div>
             </div>

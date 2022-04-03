@@ -23,6 +23,16 @@ class Admin extends Connect {
         return $data;
     }
     
+    function addPetugas($name, $username, $password, $level)
+    {
+        $data = $this->conn->query("INSERT INTO petugas VALUES(NULL, '$username', '$password', '$name', '$level')");
+
+        if ($data) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 

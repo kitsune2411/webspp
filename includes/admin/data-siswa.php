@@ -13,7 +13,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h5 class="m-0 font-weight-bold text-primary d-inline">Data Siswa</h5>
-                <a href="?p=tambah-petugas" class="btn btn-primary float-right d-inline">Tambah</a>
+                <a href="?p=tambah-siswa" class="btn btn-primary float-right d-inline">Tambah</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

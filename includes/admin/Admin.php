@@ -8,6 +8,20 @@ class Admin extends Connect {
     {
         parent::__construct();
     }
+
+    function getAllDataPetugas()
+    {
+        $data = $this->conn->query('SELECT * FROM petugas');
+
+        return $data;
+    }
+
+    function getAllDataSiswa()
+    {
+        $data = $this->conn->query('CALL GetAllDataSiswa');
+
+        return $data;
+    }
     
 }
 

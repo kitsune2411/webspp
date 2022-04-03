@@ -57,6 +57,7 @@ if (isset($_POST['submit'])) {
                                     <?php
                                         if (isset($_SESSION['error'])) {
                                             echo $_SESSION['error'];
+                                            unset($_SESSION['error']);
                                         }
                                     ?>
                                     <div class="text-center">

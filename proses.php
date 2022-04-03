@@ -22,6 +22,9 @@ class Auth extends Connect {
 
         if ($data->num_rows > 0) {
             //siswa
+            $siswa = $data->fetch_assoc();
+            
+            $_SESSION['nama'] = $siswa['nama'];
             $_SESSION['status'] = "login";
             header('Location:includes/siswa/');
         } else {
@@ -34,26 +37,20 @@ class Auth extends Connect {
                 $_SESSION['username'] = $username;
                 $_SESSION['status'] = "login";
         
-                while ($x = $data2->fetch_assoc()) {
-                    $result[] = $x;
+                $petugas = $data2->fetch_assoc();
+
+                if ($petugas['level'] == "admin") {
+                    $_SESSION['id_petugas'] = $petugas['id_petugas'];
+                    $_SESSION['nama'] = $petugas['nama_petugas'];
+                    $_SESSION['level'] = $petugas['level'];
+                    header('Location:includes/admin/');
+                } elseif ($petugas['level'] == "petugas") {
+                    $_SESSION['id_petugas'] = $petugas['id_petugas'];
+                    $_SESSION['nama'] = $petugas['nama_petugas'];
+                    $_SESSION['level'] = $petugas['level'];
+                    header('Location:includes/petugas/');
                 }
 
-                foreach($result as $petugas) :
-
-                    if ($petugas['level'] == "admin") {
-                        $_SESSION['id_petugas'] = $petugas['id_petugas'];
-                        $_SESSION['nama'] = $petugas['nama_petugas'];
-                        $_SESSION['level'] = $petugas['level'];
-                        header('Location:includes/admin/');
-                    } elseif ($petugas['level'] == "petugas") {
-                        $_SESSION['id_petugas'] = $petugas['id_petugas'];
-                        $_SESSION['nama'] = $petugas['nama_petugas'];
-                        $_SESSION['level'] = $petugas['level'];
-                        header('Location:includes/petugas/');
-                    }
-
-                endforeach;
-    
             } else {
                 $_SESSION['error'] = "credential not match";
             }

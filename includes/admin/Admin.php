@@ -69,6 +69,17 @@ class Admin extends Connect {
             return false;
         }
     }
+
+    function deleteSiswa($id)
+    {
+        $data = $this->conn->query("DELETE FROM siswa WHERE nisn = '$id'");
+
+        if ($data) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 

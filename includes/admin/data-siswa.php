@@ -62,7 +62,7 @@
                                 <td><?=$row['no_telp']?></td>
                                 <td>
                                     <a href="" class="btn btn-warning">Edit</a>
-                                    <a href="" class="btn btn-danger">Delete</a>
+                                    <a href="?p=delete-siswa&id=<?=$row['nisn']?>" onclick="return confirm('data akan dihapus, yakin?')" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                             

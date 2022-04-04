@@ -25,6 +25,10 @@ if (isset($_GET['p'])) {
         $id = $_GET['id'];
         $delete = $admin->deletePetugas($id);
         echo "<script>window.location.href='?p=petugas'</script>";
-    }  
+    }  elseif ($_GET['p'] == 'delete-siswa') {
+        $id = $_GET['id'];
+        $delete = $admin->deleteSiswa($id);
+        echo "<script>window.location.href='?p=siswa'</script>";
+    } 
 }
 ?>

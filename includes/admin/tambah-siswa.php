@@ -6,24 +6,18 @@ if (isset($_POST['submit'])) {
     $nama          = htmlspecialchars($_POST['nama']);
     $tlp          = htmlspecialchars($_POST['tlp']);
     $alamat        = htmlspecialchars($_POST['alamat']);
-    $pass         = md5($_POST['password']);
-    $confirm_pass = md5($_POST['confirm_password']);
+    $spp        = htmlspecialchars($_POST['spp']);
+    $kelas        = htmlspecialchars($_POST['kelas']);
+;
 
-    if ($pass == $confirm_pass) {
-        if ($admin->addPetugas($name, $username, $pass, $level)) {
+   
+        if ($admin->addSiswa($nisn,$nis,$nama,$alamat, $tlp,$spp,$kelas )) {
             echo "<script>alert('sukses')</script>";
-            echo "<script>window.location.href='?p=petugas'</script>";
+            echo "<script>window.location.href='?p=siswa'</script>";
         } else {
             echo "<script>alert('gagal')</script>";
         }
-    } else {
-        echo "<script>alert('password tidak sama')</script>";
-        $_SESSION['error'] == "invalid";
-    }
-
-    
 }
-?>
 ?>
 
 <!-- Begin Page Content -->
@@ -69,10 +63,28 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="form-group row">
             <div class="col-sm-6 mb-3 mb-sm-0">
-                <input type="text" class="form-control " id="kelas" placeholder="kelas" name="kelas">
+                <select type="text" class="form-control " id="kelas" name="kelas">
+                    <option value="" selected disabled>Pilih kelas</option>
+                    <?php
+                    $data = $admin->getAllKelas();
+                    foreach ($data as $kelas ) :
+                    ?>
+                        <option value="<?=$kelas['id_kelas']?>"><?=$kelas['nama_kelas']?></option>
+                    <?php endforeach; 
+                    ?>
+                </select>
             </div>
             <div class="col-sm-6">
-                <input type="text" class="form-control " id="spp" placeholder="Repeat Password" name="spp">
+            <select type="text" class="form-control " id="spp" name="spp">
+                    <option value="" selected disabled>Pilih tahun</option>
+                    <?php
+                    $data = $admin->getAllSpp();
+                    foreach ($data as $spp ) :
+                    ?>
+                        <option value="<?=$spp['id_spp']?>"><?=$spp['tahun']?></option>
+                    <?php endforeach; 
+                    ?>
+                </select>
             </div>
         </div>
         <label for="tlp">No telepon</label>

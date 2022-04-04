@@ -22,10 +22,24 @@ class Admin extends Connect {
 
         return $data;
     }
+
+    function getAllKelas()
+    {
+        $data = $this->conn->query('SELECT * FROM kelas');
+
+        return $data;
+    }
+
+    function getAllSpp()
+    {
+        $data = $this->conn->query('SELECT * FROM spp');
+
+        return $data;
+    }
     
     function addPetugas($name, $alamat, $password, $level)
     {
-        $data = $this->conn->query("INSERT INTO petugas VALUES(NULL, '$username', '$password', '$name', '$level')");
+        $data = $this->conn->query("INSERT INTO petugas VALUES(NULL,  '$password', '$name', '$level')");
 
         if ($data) {
             return true;
@@ -45,9 +59,9 @@ class Admin extends Connect {
         }
     }
 
-    function addSiswa($nisn,$nis,$name, $alamat, $telp)
+    function addSiswa($nisn,$nis,$name, $alamat, $telp, $spp, $kelas)
     {
-        $data = $this->conn->query("INSERT INTO siswa VALUES(NULL, '$nisn', '$nis', '$name', )");
+        $data = $this->conn->query("INSERT INTO siswa VALUES('$nisn', '$nis', '$name', '$kelas', '$alamat', '$telp', $spp)");
 
         if ($data) {
             return true;

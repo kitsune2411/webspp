@@ -1,5 +1,4 @@
 
-
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
@@ -51,7 +50,7 @@
                                 <td><?=$row['level']?></td>
                                 <td>
                                     <a href="" class="btn btn-warning">Edit</a>
-                                    <a href="" class="btn btn-danger">Delete</a>
+                                    <a href="?p=delete-petugas&id=<?=$row['id_petugas']?>" onclick="return confirm('data akan dihapus, yakin?')" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                             
@@ -65,5 +64,6 @@
     </div>
     <!-- /.container-fluid -->
 
+    
 </div>
 <!-- End of Main Content -->

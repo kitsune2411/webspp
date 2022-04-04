@@ -21,6 +21,10 @@ if (isset($_GET['p'])) {
         include 'tambah-siswa.php';
     } elseif ($_GET['p'] == 'tambah-spp') {
         include 'tambah-spp.php';
-    } 
+    } elseif ($_GET['p'] == 'delete-petugas') {
+        $id = $_GET['id'];
+        $delete = $admin->deletePetugas($id);
+        echo "<script>window.location.href='?p=petugas'</script>";
+    }  
 }
 ?>

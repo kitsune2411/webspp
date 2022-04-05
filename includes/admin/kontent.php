@@ -33,6 +33,14 @@ if (isset($_GET['p'])) {
         $id = $_GET['id'];
         $delete = $admin->deleteSiswa($id);
         echo "<script>window.location.href='?p=siswa'</script>";
+    } elseif ($_GET['p'] == 'delete-kelas') {
+        $id = $_GET['id'];
+        $delete = $admin->deleteKelas($id);
+        echo "<script>window.location.href='?p=kelas'</script>";
+    } elseif ($_GET['p'] == 'delete-spp') {
+        $id = $_GET['id'];
+        $delete = $admin->deleteSpp($id);
+        echo "<script>window.location.href='?p=spp'</script>";
     } 
 }
 ?>

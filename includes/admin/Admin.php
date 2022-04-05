@@ -92,9 +92,31 @@ class Admin extends Connect {
         }
     }
 
+    function deleteSpp($id)
+    {
+        $data = $this->conn->query("DELETE FROM spp WHERE id_spp = '$id'");
+
+        if ($data) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function AddKelas($kelas, $komka)
     {
         $data = $this->conn->query("INSERT INTO kelas VALUES(NULL, '$kelas', '$komka')");
+
+        if ($data) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function deleteKelas($id)
+    {
+        $data = $this->conn->query("DELETE FROM kelas WHERE id_kelas = '$id'");
 
         if ($data) {
             return true;

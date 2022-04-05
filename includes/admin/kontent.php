@@ -15,12 +15,16 @@ if (isset($_GET['p'])) {
         include 'data-siswa.php';
     } elseif ($_GET['p'] == 'spp') {
         include 'data-spp.php';
+    } elseif ($_GET['p'] == 'kelas') {
+        include 'data-kelas.php';
     } elseif ($_GET['p'] == 'tambah-petugas') {
         include 'tambah-petugas.php';
     } elseif ($_GET['p'] == 'tambah-siswa') {
         include 'tambah-siswa.php';
     } elseif ($_GET['p'] == 'tambah-spp') {
         include 'tambah-spp.php';
+    } elseif ($_GET['p'] == 'tambah-kelas') {
+        include 'tambah-kelas.php';
     } elseif ($_GET['p'] == 'delete-petugas') {
         $id = $_GET['id'];
         $delete = $admin->deletePetugas($id);

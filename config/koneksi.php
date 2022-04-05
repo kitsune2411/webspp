@@ -5,13 +5,23 @@ class Connect {
     var $user = "root";
     var $pass = "";
     var $db   = "db_spp";
-
+    
+    /**
+     * create koneksi
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->conn = new mysqli($this->host, $this->user, $this->pass, $this->db);
         
     }
-
+    
+    /**
+     * cek sudah login
+     *
+     * @return void
+     */
     public function islogin()
     {
         if (!$_SESSION['status'] == 'login') {
@@ -19,7 +29,12 @@ class Connect {
             exit;
         }
     }
-
+    
+    /**
+     * jika sudah login tidak dapat akses login page
+     *
+     * @return void
+     */
     public function iflogin()
     {
         if (isset($_SESSION['status'])) { 
@@ -36,7 +51,12 @@ class Connect {
             }
         }
     }
-
+    
+    /**
+     * cek apakah user adalah admin
+     *
+     * @return void
+     */
     public function isAdmin()
     {
         if (isset($_SESSION['level'])) {

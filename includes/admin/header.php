@@ -45,6 +45,7 @@
                         <a class="collapse-item" href="?p=petugas">Data Petugas</a>
                         <a class="collapse-item" href="?p=siswa">Data Siswa</a>
                         <a class="collapse-item" href="?p=spp">Data Spp</a>
+                        <a class="collapse-item" href="?p=kelas">Data Kelas</a>
                     </div>
                 </div>
             </li>

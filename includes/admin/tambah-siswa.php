@@ -8,8 +8,6 @@ if (isset($_POST['submit'])) {
     $alamat        = htmlspecialchars($_POST['alamat']);
     $spp        = htmlspecialchars($_POST['spp']);
     $kelas        = htmlspecialchars($_POST['kelas']);
-;
-
    
         if ($admin->addSiswa($nisn,$nis,$nama,$alamat, $tlp,$spp,$kelas )) {
             echo "<script>alert('sukses')</script>";
@@ -66,8 +64,7 @@ if (isset($_POST['submit'])) {
                 <select type="text" class="form-control " id="kelas" name="kelas">
                     <option value="" selected disabled>Pilih kelas</option>
                     <?php
-                    $data = $admin->getAllKelas();
-                    foreach ($data as $kelas ) :
+                    foreach ($admin->getAllKelas() as $kelas ) :
                     ?>
                         <option value="<?=$kelas['id_kelas']?>"><?=$kelas['nama_kelas']?></option>
                     <?php endforeach; 
@@ -78,8 +75,7 @@ if (isset($_POST['submit'])) {
             <select type="text" class="form-control " id="spp" name="spp">
                     <option value="" selected disabled>Pilih tahun</option>
                     <?php
-                    $data = $admin->getAllSpp();
-                    foreach ($data as $spp ) :
+                    foreach ($admin->getAllSpp() as $spp ) :
                     ?>
                         <option value="<?=$spp['id_spp']?>"><?=$spp['tahun']?></option>
                     <?php endforeach; 

@@ -80,6 +80,28 @@ class Admin extends Connect {
             return false;
         }
     }
+
+    function AddSpp($tahun, $nominal)
+    {
+        $data = $this->conn->query("INSERT INTO spp VALUES(NULL, '$tahun', '$nominal')");
+
+        if ($data) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function AddKelas($kelas, $komka)
+    {
+        $data = $this->conn->query("INSERT INTO kelas VALUES(NULL, '$kelas', '$komka')");
+
+        if ($data) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 

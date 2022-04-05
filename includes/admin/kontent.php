@@ -41,6 +41,8 @@ if (isset($_GET['p'])) {
         $id = $_GET['id'];
         $delete = $admin->deleteSpp($id);
         echo "<script>window.location.href='?p=spp'</script>";
-    } 
+    } else {
+        include '404.php';
+    }
 }
 ?>

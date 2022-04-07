@@ -25,7 +25,15 @@ if (isset($_GET['p'])) {
         include 'tambah-spp.php';
     } elseif ($_GET['p'] == 'tambah-kelas') {
         include 'tambah-kelas.php';
-    } elseif ($_GET['p'] == 'delete-petugas') {
+    } elseif ($_GET['p'] == 'edit-petugas') {
+        include 'edit-petugas.php';
+    } elseif ($_GET['p'] == 'edit-siswa') {
+        include 'edit-siswa.php';
+    } elseif ($_GET['p'] == 'edit-spp') {
+        include 'edit-spp.php';
+    }elseif ($_GET['p'] == 'edit-kelas') {
+        include 'edit-kelas.php';
+    }  elseif ($_GET['p'] == 'delete-petugas') {
         $id = $_GET['id'];
         $delete = $admin->deletePetugas($id);
         echo "<script>window.location.href='?p=petugas'</script>";
@@ -41,6 +49,10 @@ if (isset($_GET['p'])) {
         $id = $_GET['id'];
         $delete = $admin->deleteSpp($id);
         echo "<script>window.location.href='?p=spp'</script>";
+    } elseif ($_GET['p'] == 'bayar') {
+        include 'bayar.php';
+    } elseif ($_GET['p'] == 'history') {
+        include 'history.php';
     } else {
         include '404.php';
     }

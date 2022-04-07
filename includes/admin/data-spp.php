@@ -53,7 +53,7 @@
                                 <td><?=$row['tahun']?></td>
                                 <td><?=$row['nominal']?></td>
                                 <td>
-                                    <a href="" class="btn btn-warning">Edit</a>
+                                    <a href="?p=edit-spp&id=<?=$row['id_spp']?>" class="btn btn-warning">Edit</a>
                                     <a href="?p=delete-spp&id=<?=$row['id_spp']?>" onclick="return confirm('data akan dihapus, yakin?')" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>

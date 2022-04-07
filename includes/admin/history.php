@@ -11,8 +11,9 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h5 class="m-0 font-weight-bold text-primary d-inline">Data Petugas</h5>
-                <a href="?p=tambah-petugas" class="btn btn-primary float-right d-inline">Tambah</a>
+                <h5 class="m-0 font-weight-bold text-primary d-inline">History pembayaran</h5>
+                <button onclick="window.print()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right"><i
+            class="fas fa-download fa-sm text-white-50"></i> Generate Report</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -21,9 +22,14 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Name</th>
-                                <th>username</th>
-                                <th>level</th>
+                                <!-- <th>Siswa</th> -->
+                                <th>NISN</th>
+                                <th>Tanggal dibayar</th>
+                                <th>Bulan dibayar</th>
+                                <th>Tahun dibayar</th>
+                                <th>Tahun SPP</th>
+                                <th>Jumlah bayar</th>
+                                <th>Petugas</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -38,20 +44,21 @@
                         <tbody>
                         <?php
                         $no = 1;
-                        $petugas = $admin->getAllDataPetugas();
+                        $history = $admin->getHistoryPembayaran();
                         
-                        while ($row = $petugas->fetch_assoc()):
+                        while ($row = $history->fetch_assoc()):
 
                         ?>
                             <tr>
                                 <td><?=$no++?></td>
-                                <td><?=$row['nama_petugas']?></td>
-                                <td><?=$row['username']?></td>
-                                <td><?=$row['level']?></td>
-                                <td>
-                                    <a href="?p=edit-petugas&id=<?=$row['id_petugas']?>" class="btn btn-warning">Edit</a>
-                                    <a href="?p=delete-petugas&id=<?=$row['id_petugas']?>" onclick="return confirm('data akan dihapus, yakin?')" class="btn btn-danger">Delete</a>
-                                </td>
+                                <td><?=$row['nisn']?></td>
+                                <td><?=$row['tgl_bayar']?></td>
+                                <td><?=$row['bulan_dibayar']?></td>
+                                <td><?=$row['tahun_dibayar']?></td>
+                                <td><?=$row['id_spp']?></td>
+                                <td><?=$row['jumlah_bayar']?></td>
+                                <td><?=$row['id_petugas']?></td>
+                                
                             </tr>
                             
                         <?php endwhile ?>
@@ -67,3 +74,4 @@
     
 </div>
 <!-- End of Main Content -->
+

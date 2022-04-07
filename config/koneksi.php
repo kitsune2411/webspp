@@ -14,6 +14,8 @@ class Connect {
     public function __construct()
     {
         $this->conn = new mysqli($this->host, $this->user, $this->pass, $this->db);
+
+        return $this->conn;
         
     }
     

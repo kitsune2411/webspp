@@ -1,5 +1,7 @@
 <?php
 
+$id = $_GET['id'];
+
 if (isset($_POST['submit'])) {
     $nisn         = htmlspecialchars($_POST['nisn']);
     $nis          = htmlspecialchars($_POST['nis']);
@@ -9,7 +11,7 @@ if (isset($_POST['submit'])) {
     $spp        = htmlspecialchars($_POST['spp']);
     $kelas        = htmlspecialchars($_POST['kelas']);
    
-        if ($admin->addSiswa($nisn,$nis,$nama,$alamat, $tlp,$spp,$kelas )) {
+        if ($admin->updateSiswa($nisn,$nis,$nama,$alamat, $tlp,$spp,$kelas )) {
             echo "<script>alert('sukses')</script>";
             echo "<script>window.location.href='?p=siswa'</script>";
         } else {
@@ -22,7 +24,7 @@ if (isset($_POST['submit'])) {
 <div class="container-fluid">
 
     <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800 d-inline">Edit Siswa</h1>
+        <h1 class="h3 mb-2 text-gray-800 d-inline">Tambah Siswa</h1>
         <a href="?p=siswa" class="btn btn-sm btn-light text-primary float-right d-inline">
             <i class="fa fa-arrow-left">&nbsp;</i>
             Kembali ke list siswa
@@ -31,6 +33,9 @@ if (isset($_POST['submit'])) {
         
     <!-- form tambah petugas -->
     <form class="user" method="POST" action="">
+        <?php
+    foreach ($admin->getDataSiswa($id) as $key => $siswa) :
+        ?>
         <div class="form-group row mb-0">
             <div class="col-sm-6 mb-0 mb-sm-0">
                 <label for="nisn">NISN</label>
@@ -41,15 +46,15 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="form-group row">
             <div class="col-sm-6 mb-3 mb-sm-0">
-                <input type="text" class="form-control " id="nisn" placeholder="Masukan nisn" name="nisn" required>
+                <input type="text" class="form-control " id="nisn" placeholder="Masukan nisn" name="nisn" value="<?=$siswa['nisn']?>" readonly required>
             </div>
             <div class="col-sm-6">
-                <input type="text" name="nis" id="nis" class="form-control" placeholder="Masukan nis" required>
+                <input type="text" name="nis" id="nis" class="form-control" placeholder="Masukan nis"  value="<?=$siswa['nis']?>" required>
             </div>
         </div>
         <label for="nama">Nama</label>
         <div class="form-group">
-            <input type="text" class="form-control" id="nama" placeholder="nama lengkap" name="nama" required>
+            <input type="text" class="form-control" id="nama" placeholder="nama lengkap" name="nama"  value="<?=$siswa['nama']?>" required>
         </div>
         <div class="form-group row mb-0">
             <div class="col-sm-6 mb-0 mb-sm-0">
@@ -85,17 +90,17 @@ if (isset($_POST['submit'])) {
         </div>
         <label for="tlp">No telepon</label>
         <div class="form-group">
-            <input type="text" class="form-control" id="tlp" placeholder="No telepon" name="tlp" required> 
+            <input type="text" class="form-control" id="tlp" placeholder="No telepon" name="tlp"  value="<?=$siswa['no_telp']?>" required>
         </div>
         <label for="alamat">Alamat</label>
         <div class="form-group">
-            <textarea name="alamat" id="alamat"  rows="3" class="form-control" placeholder="alamat lengkap" required></textarea>
+            <textarea name="alamat" id="alamat"  rows="3" class="form-control" placeholder="alamat lengkap"  required><?=$siswa['alamat']?> </textarea>
         </div>
         
         <button type="submit" name="submit" class="btn btn-primary float-right px-3 mt-3">
             Submit
         </button>
-
+<?php endforeach ?>
     </form>
 
 

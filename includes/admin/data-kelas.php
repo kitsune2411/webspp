@@ -51,7 +51,7 @@
                         <td><?=$row['nama_kelas']?></td>
                         <td><?=$row['kopetensi_keahlian']?></td>
                         <td>
-                            <a href="" class="btn btn-warning">Edit</a>
+                            <a href="?p=edit-kelas&id=<?=$row['id_kelas']?>" class="btn btn-warning">Edit</a>
                             <a href="?p=delete-kelas&id=<?=$row['id_kelas']?>" onclick="return confirm('data akan dihapus, yakin?')" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>

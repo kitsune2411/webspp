@@ -18,7 +18,7 @@ if (isset($_POST['submit'])) {
 <div class="container-fluid">
 
     <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800 d-inline">Tambah Kelas</h1>
+        <h1 class="h3 mb-2 text-gray-800 d-inline">Edit Kelas</h1>
         <a href="?p=kelas" class="btn btn-sm btn-light text-primary float-right d-inline">
             <i class="fa fa-arrow-left">&nbsp;</i>
             Kembali ke list kelas
@@ -37,10 +37,10 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="form-group row">
             <div class="col-sm-6 mb-3 mb-sm-0">
-                <input type="text" class="form-control " id="kelas" placeholder="Masukan kelas" name="kelas">
+                <input type="text" class="form-control " id="kelas" placeholder="Masukan kelas" name="kelas" required>
             </div>
             <div class="col-sm-6">
-                <input type="text" name="komka" id="komka" class="form-control" placeholder="Masukan kopentensi keahlian">
+                <input type="text" name="komka" id="komka" class="form-control" placeholder="Masukan kopentensi keahlian" required>
             </div>
         </div>
         

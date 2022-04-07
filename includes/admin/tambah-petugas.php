@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
 <div class="container-fluid">
 
     <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800 d-inline">Tambah Petugas</h1>
+        <h1 class="h3 mb-2 text-gray-800 d-inline">Edit Petugas</h1>
         <a href="?p=petugas" class="btn btn-sm btn-light text-primary float-right d-inline">
             <i class="fa fa-arrow-left">&nbsp;</i>
             Kembali ke list petugas
@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
     <form class="user" method="POST" action="">
         <label for="fullname">Nama Lengkap</label>
         <div class="form-group">
-            <input type="text" class="form-control " id="fullname" placeholder="Masukan Nama Lengkap" name="name">
+            <input type="text" class="form-control " id="fullname" placeholder="Masukan Nama Lengkap" name="name" required>
         </div>
         <div class="form-group row mb-0">
             <div class="col-sm-6 mb-0 mb-sm-0">
@@ -50,19 +50,15 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="form-group row">
             <div class="col-sm-6 mb-3 mb-sm-0">
-                <input type="text" class="form-control " id="username" placeholder="Masukan Username" name="username">
+                <input type="text" class="form-control " id="username" placeholder="Masukan Username" name="username" required>
             </div>
             <div class="col-sm-6">
-                <select name="level" id="level" class="form-control">
+                <select name="level" id="level" class="form-control" required>
                     <option value="" selected disabled>level petugas</option>
                     <option value="admin">Admin</option>
                     <option value="petugas">Petugas</option>
                 </select>
             </div>
-        </div>
-        <label for="email">Email</label>
-        <div class="form-group">
-            <input type="email" class="form-control" id="email" placeholder="Email Address" name="email">
         </div>
         <div class="form-group row mb-0">
             <div class="col-sm-6 mb-0 mb-sm-0">
@@ -74,10 +70,10 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="form-group row">
             <div class="col-sm-6 mb-3 mb-sm-0">
-                <input type="password" class="form-control " id="password" placeholder="Password" name="password">
+                <input type="password" class="form-control " id="password" placeholder="Password" name="password" required>
             </div>
             <div class="col-sm-6">
-                <input type="password" class="form-control " id="confirm_password" placeholder="Repeat Password" name="confirm_password">
+                <input type="password" class="form-control " id="confirm_password" placeholder="Repeat Password" name="confirm_password" required>
             </div>
         </div>
         <button type="submit" name="submit" class="btn btn-primary float-right px-3 mt-3">

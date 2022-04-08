@@ -209,6 +209,13 @@ class Admin extends Connect {
         }
     }
 
+    public function getNominalBayar($nisn_fix)
+    {
+        $data = $this->conn->query("SELECT * FROM siswa a LEFT JOIN spp b ON a.id_spp = b.id_spp  WHERE nisn='$nisn_fix'");
+
+        return $data;
+    }
+
 
 }
 

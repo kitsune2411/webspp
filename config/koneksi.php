@@ -85,4 +85,37 @@ class Connect {
     }
 }
 
+class DB  
+{
+    private $host = 'localhost';
+    private $user = 'root';
+    private $psw = "";
+    private $db = "db_spp";
+
+    public function connect()
+    {
+        $conn = new mysqli($this->host, $this->user, $this->psw, $this->db) or die(mysqli_connect_error());
+
+        return $conn;
+    }
+
+    public function query($query)
+    {
+        $conn = $this->connect();
+        $queryRun = $conn->query($query) or die(mysqli_errno($conn));
+
+        return $queryRun;
+    }
+
+    public function FetchAll($query)
+    {
+        $queryRun = $this->query($query);
+
+        $data = mysqli_fetch_all($queryRun, MYSQLI_ASSOC);
+
+        return $data;
+    }
+}
+
+
 ?>

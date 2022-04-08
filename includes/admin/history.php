@@ -30,7 +30,6 @@
                                 <th>Tahun SPP</th>
                                 <th>Jumlah bayar</th>
                                 <th>Petugas</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <!-- <tfoot>

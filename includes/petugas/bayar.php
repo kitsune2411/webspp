@@ -62,7 +62,7 @@ if (isset($_POST['submit']) && !empty($nisn)) {
             $bulan_dibayar = $bulan_belum_bayar[$i - 1];
 
             $sqli = "INSERT INTO pembayaran( `id_petugas`, `nisn`, `tgl_bayar`, `bulan_dibayar`, `tahun_dibayar`, `id_spp`, `jumlah_bayar`) VALUES ( '$id_petugas', '$nisn', '$tgl_bayar', '$bulan_dibayar', '$tahun_dibayar', '$id_spp', '$nominal_bayar_siswa')";
-            $entry_bayar = $admin->conn->query($sqli);
+            $entry_bayar = $petugas->conn->query($sqli);
 
             $bulan_sukses_bayar[] = $bulan_dibayar;
         }
@@ -109,7 +109,7 @@ if (isset($_POST['submit']) && !empty($nisn)) {
                 <input type="hidden" name="p" value="bayar">
                 <input type="text" name="cek_nisn" id="nisn" class="form-control mr-3" autocomplete="false" list="nisns">
                 <datalist id="nisns">
-                    <?php foreach ($admin->getAllDataSiswa() as $siswa): ?>
+                    <?php foreach ($petugas->getAllDataSiswa() as $siswa): ?>
                         <option value="<?=$siswa['nisn']?>-<?=$siswa['nama']?>">
                     <?php endforeach ?>
                 </datalist>

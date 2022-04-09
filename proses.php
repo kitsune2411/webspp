@@ -24,7 +24,9 @@ class Auth extends Connect {
             //siswa
             $siswa = $data->fetch_assoc();
             
+            $_SESSION['nisn'] = $siswa['nisn'];
             $_SESSION['nama'] = $siswa['nama'];
+            $_SESSION['level'] = 'siswa';
             $_SESSION['status'] = "login";
             header('Location:includes/siswa/');
         } else {

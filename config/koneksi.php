@@ -62,7 +62,7 @@ class Connect {
     public function isAdmin()
     {
         if (isset($_SESSION['level'])) {
-            if (!$_SESSION['level'] == 'admin') {
+            if ($_SESSION['level'] != 'admin') {
                 header('location:../../unauthorize.php');
             }
         } else {

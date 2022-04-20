@@ -3,8 +3,8 @@ require_once "../../config/koneksi.php";
 
 $db = new DB;
 
-$nisn ='';
-$bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+// $nisn ='';
+$bulan = ['Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni'];
 
 if(isset($_GET['cek'])) {
     
@@ -22,10 +22,17 @@ if(isset($_GET['cek'])) {
 
 
 if (isset($_POST['submit']) && !empty($nisn)) {
+    
         $id_petugas = $_SESSION['id_petugas'];
         $nisn = $_POST['nisn_bayar'];
         $tgl_bayar = date('Y-m-d');
-        $tahun_dibayar = date('Y');
+        
+        if(date('m') >= 7){
+            $tahun_dibayar = date('Y');
+        } else {
+            $tahun_dibayar = (date('Y')-1);
+        }
+        
         $jml_dibayar = $_POST['jml_bayar'];
 
         $id_spp = $_POST['id_spp'];
@@ -66,19 +73,22 @@ if (isset($_POST['submit']) && !empty($nisn)) {
 
             $bulan_sukses_bayar[] = $bulan_dibayar;
         }
-        if ($entry_bayar) {
-            // var_dump($entry_bayar);
-            echo "
-                <div class='alert alert-success fade show' role='alert'>
-                Pembayaran pada bulan "; 
-                foreach ($bulan_sukses_bayar as $index => $nilai) {
-                    echo $nilai. ", ";
-                } 
-            echo " telah berhasil
-            </div>";
-        } else {
-            // var_dump($sqli);
-            // echo mysqli_error($admin->conn);
+        if (isset($entry_bayar)) {
+            
+            if ($entry_bayar) {
+                // var_dump($entry_bayar);
+                echo "
+                    <div class='alert alert-success fade show' role='alert'>
+                    Pembayaran pada bulan "; 
+                    foreach ($bulan_sukses_bayar as $index => $nilai) {
+                        echo $nilai. ", ";
+                    } 
+                echo " telah berhasil
+                </div>";
+            } else {
+                // var_dump($sqli);
+                // echo mysqli_error($admin->conn);
+            }
         }
 
 
@@ -135,7 +145,17 @@ if (isset($_POST['submit']) && !empty($nisn)) {
     <!-- form tambah pembayaran -->
         <div class="card shadow mb-4 " >
             <div class="card-header py-3">
-                <h5 class="m-0 font-weight-bold text-primary d-inline">Pembayaran Tahun <?=date('Y')?></h5>
+                <h5 class="m-0 font-weight-bold text-primary d-inline">Pembayaran Tahun Ajaran 
+                    <?php 
+                    $month = date('m');
+                    if($month >= 7){
+                        echo date('Y').'/'.(date('Y')+1);
+                    } else {
+                        echo (date('Y')-1).'/'.(date('Y'));
+                    }
+                    
+                    ?>
+                </h5>
             </div>
             <div class="card-body">
                 <?php foreach($siswa_bayar as $data_siswa_bayar) :  $id_spp=$data_siswa_bayar['id_spp']?>
@@ -192,20 +212,30 @@ if (isset($_POST['submit']) && !empty($nisn)) {
         <form action="" method="post">  
             <input type="hidden" name="nisn_bayar" value="<?=$nisn?>">
             <input type="hidden" name="id_spp" value="<?=$id_spp?>">
-            <select name="jml_bayar" id="jml_bayar" class="form-control">
+            <select name="jml_bayar" id="jml_bayar" class="form-control" required>
+                <?php
+                $cek_total_dah_bayar = $db->query("SELECT * FROM pembayaran WHERE nisn = '$nisn'")->num_rows;
+                if($cek_total_dah_bayar == 12){ ?>
+                    <option selected disabled value="">Sudah Lunas </option>
+                    <?php
+                }else {
+                    
+                    ?>
                 <option value="" selected disabled>Pilih Nominal</option>
                 <?php
-                    for ($i=1; $i <= 12; $i++) :
-                        $nominal = $nominal_bayar['nominal'] * $i;
-                        ?>
+                for ($i=1; $i <= 12; $i++) :
+                    $nominal = $nominal_bayar['nominal'] * $i;
+                    ?>
                     <option value="<?=$i?>"><?=$i?>x bayar - Rp. <?=number_format($nominal)?></option>
                     <?php endfor; ?>
+                    <?php } ?>
                 </select>
                 
                 <button type="submit" name="submit" class="btn btn-primary mt-3 float-right">Bayar</button>
             </form>
         </div>
-<?php endif ?>
+        <?php 
+        endif ?>
     </div>
     <!-- /.container-fluid -->
     

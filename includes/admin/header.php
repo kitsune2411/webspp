@@ -133,6 +133,12 @@
                     <span>History pembayaran</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="?p=cetak">
+                    <i class="fas fa-fw fa-print"></i>
+                    <span>Generate pembayaran</span></a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

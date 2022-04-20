@@ -53,6 +53,8 @@ if (isset($_GET['p'])) {
         include 'bayar.php';
     } elseif ($_GET['p'] == 'history') {
         include 'history.php';
+    }elseif ($_GET['p'] == 'cetak') {
+        include 'cetak.php';
     } else {
         include '404.php';
     }

@@ -81,13 +81,14 @@
 
 </div>
 
-<center>
+<div class="text-center">
+
     <video autoplay loop muted>
         <source src="../vid/bumi.mp4" type="video/mp4">
     </video>
     
 </div>
-</center>
+</div>
 <!-- /.container-fluid -->
 
 </div>
